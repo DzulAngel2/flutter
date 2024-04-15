@@ -1,18 +1,18 @@
 class Bag {
-  String name;
-  String imagePath;
+  final String name;
+  final String imageUrl;
+  final String descipcion;
+  final double precio;
 
-  Bag({
-    required this.name,
-    required this.imagePath,
-  });
-}
+  Bag({required this.name, required this.imageUrl, required this.descipcion, required this.precio});
 
-List<Bag> listOfBags() {
-  return [
-    Bag(name: "Sabila", imagePath: "plant1.jpg"),
-    Bag(name: "Limón", imagePath: "plant2.jpg"),
-    Bag(name: "Tomate", imagePath: "plant3.jpg"),
-    Bag(name: "Habanero", imagePath: "plant4.jpg"),
-  ];
+  factory Bag.fromJson(Map<String, dynamic> json) {
+    return Bag(
+        name: json['nombre'],
+        imageUrl: json['urlFotoProducto'],
+        descipcion: json['descripcion'],
+        precio: json['precio']
+        );
+        
+  }
 }

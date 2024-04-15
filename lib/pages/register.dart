@@ -12,20 +12,20 @@ class RegisterForm extends StatelessWidget {
       title: 'Register Form',
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(5, 146, 80, 1),
-          title: Text(
+          backgroundColor: const Color.fromRGBO(5, 146, 80, 1),
+          title: const Text(
             'Registro',
             style: TextStyle(color: Colors.white),
           ),
           leading: IconButton( // Agrega un IconButton en la parte izquierda de la AppBar
-            icon: Icon(Icons.arrow_back, color: Colors.white), // Ícono de flecha hacia atrás
+            icon: const Icon(Icons.arrow_back, color: Colors.white), // Ícono de flecha hacia atrás
             onPressed: () {
               Navigator.pop(context); // Regresa a la pantalla anterior (login)
             },
           ),
         ),
         body: RegisterFormWidget(),
-        backgroundColor: Color.fromARGB(255, 213, 207, 207),
+        backgroundColor: const Color.fromARGB(255, 213, 207, 207),
       ),
     );
   }
@@ -48,12 +48,12 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
+          const Text(
             'Bienvenidos',
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
-              color: const Color.fromARGB(255, 0, 0, 0),
+              color:  Color.fromARGB(255, 0, 0, 0),
               // Color verde
             ),
           ),
@@ -94,7 +94,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -114,7 +114,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
@@ -135,7 +135,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -151,8 +151,8 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Registro exitoso'),
-                                content: Text(
+                                title: const Text('Registro exitoso'),
+                                content: const Text(
                                     'Su cuenta a sido creada de forma exitosa.'),
                                 actions: <Widget>[
                                   TextButton(
@@ -163,7 +163,7 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                                               builder: (context) =>
                                                   Login())); // Regresa al inicio de sesión
                                     },
-                                    child: Text('OK'),
+                                    child: const Text('OK'),
                                   ),
                                 ],
                               );
@@ -173,10 +173,10 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                       },
                       child: Text(
                         'Register',
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(5, 146, 80, 1),
+                        backgroundColor: const Color.fromRGBO(5, 146, 80, 1),
                       ),
                     ),
                   ],
