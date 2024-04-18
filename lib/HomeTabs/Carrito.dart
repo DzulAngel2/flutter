@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopping_app/pagesDrawer.dart/order.dart';
+
+class Order {
+  List<String> products;
+  List<int> quantities;
+  double totalPrice;
+
+  Order(this.products, this.quantities, this.totalPrice);
+}
 
 class Carrito extends StatefulWidget {
   const Carrito({Key? key}) : super(key: key);
@@ -9,13 +18,15 @@ class Carrito extends StatefulWidget {
 }
 
 class _CarritoState extends State<Carrito> {
-  int selectedIndex =
-      -1; // Índice de la planta seleccionada, -1 significa que ninguna está seleccionada
-  List<int> itemCounts =
-      List.filled(4, 0); // Contadores para cada planta, inicializados en 0
-
-  // Precios de cada planta
+  int selectedIndex = -1;
+  List<int> itemCounts = List.filled(4, 0);
   List<double> prices = [5.99, 4.49, 3.99, 2.99];
+  List<String> plantNames = [
+    "Planta de Sabila",
+    "Planta de Limón",
+    "Planta de Tomate",
+    "Planta de Habanero"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,35 +50,64 @@ class _CarritoState extends State<Carrito> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          // Lógica para pagar
-          // Esto es solo un marcador de posición, deberías implementar la lógica para procesar el pago
+          // Calcular el precio total
+          double totalPrice = 0;
+          List<String> products = [];
+          List<int> quantities = [];
+
+          for (int i = 0; i < itemCounts.length; i++) {
+            if (itemCounts[i] > 0) {
+              totalPrice += itemCounts[i] * prices[i];
+              products.add(plantNames[i]);
+              quantities.add(itemCounts[i]);
+            }
+          }
+
+          // Crear la orden
+          Order order = Order(products, quantities, totalPrice);
+
+          // Mostrar la orden en un AlertDialog
           showDialog(
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: const Text("Pago realizado"),
-                content: const Text("El pago se ha procesado correctamente."),
+                title: Text("Orden realizada"),
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("Productos:"),
+                    for (int i = 0; i < order.products.length; i++)
+                      Text(
+                          "${order.products[i]} - Cantidad: ${order.quantities[i]}"),
+                    SizedBox(height: 10),
+                    Text(
+                        "Precio Total: \$${order.totalPrice.toStringAsFixed(2)}"),
+                  ],
+                ),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.of(context).pop();
+                      guardarOrdenes(
+                          ordenes); // Guardar la orden en el archivo ordens.dart
                     },
-                    child: const Text("Aceptar"),
+                    child: Text("Aceptar"),
                   ),
                 ],
               );
             },
           );
         },
-        label: const Text(
+        label: Text(
           'Pagar',
           style: TextStyle(color: Colors.white),
         ),
-        icon: const Icon(
+        icon: Icon(
           Icons.payment,
           color: Colors.white,
         ),
-        backgroundColor: const Color.fromRGBO(5, 146, 80, 1),
+        backgroundColor: Color.fromRGBO(5, 146, 80, 1),
       ),
     );
   }
@@ -96,7 +136,7 @@ class _CarritoState extends State<Carrito> {
           border: Border.all(
             color: selectedIndex == index
                 ? const Color.fromARGB(255, 0, 90, 163)
-                : Colors.transparent, // Color del borde si está seleccionado
+                : Colors.transparent,
             width: 2,
           ),
         ),
@@ -115,7 +155,7 @@ class _CarritoState extends State<Carrito> {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                   child: Text(
-                    '\$${prices[index]}', // Precio de la planta
+                    '\$${prices[index]}',
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -125,7 +165,7 @@ class _CarritoState extends State<Carrito> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             Text(
               plantName,
               style: GoogleFonts.playfairDisplay(
@@ -160,7 +200,7 @@ class _CarritoState extends State<Carrito> {
                         }
                       });
                     },
-                    icon: const Icon(Icons.remove),
+                    icon: Icon(Icons.remove),
                     color: const Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
@@ -184,7 +224,7 @@ class _CarritoState extends State<Carrito> {
                         itemCounts[index]++;
                       });
                     },
-                    icon: const Icon(Icons.add),
+                    icon: Icon(Icons.add),
                     color: const Color.fromARGB(255, 0, 1, 2),
                   ),
                 ),

@@ -5,40 +5,42 @@ class BagItem extends StatelessWidget {
   final Bag bag;
 
   const BagItem({required this.bag, Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        _showOptionsDialog(context);
-      },
-      child: Card(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Image.network(
-                bag.imageUrl,
-                fit: BoxFit.cover,
-                height: 120,
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          _showOptionsDialog(context);
+        },
+        child: Card(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Image.network(
+                  bag.imageUrl,
+                  fit: BoxFit.cover,
+                  height: 120,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    bag.name,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      bag.name,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

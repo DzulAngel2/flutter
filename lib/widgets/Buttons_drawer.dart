@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/pages/home.dart';
 import 'package:shopping_app/pages/login.dart';
-
+import 'package:shopping_app/pagesDrawer.dart/ventas.dart';
 
 Widget buttonInicio(BuildContext context) {
   return ElevatedButton(
@@ -41,7 +41,11 @@ Widget buttonVentas(BuildContext context) {
   return ElevatedButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Login()));
+          context,
+          MaterialPageRoute(
+            builder: (context) => Ventas(),
+          ),
+        );
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -58,7 +62,7 @@ Widget buttonInventario(BuildContext context) {
   return ElevatedButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const Login()));
+            context, MaterialPageRoute(builder: (context) => Ventas()));
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

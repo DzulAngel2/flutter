@@ -28,9 +28,7 @@ class _HomeState extends State<Home> {
                   children: [
                     ImageDrawer(),
                     buttonInicio(context),
-                    buttonEncontrar(context),
                     buttonVentas(context),
-                    buttonInventario(context),
                   ],
                 ),
               ),
@@ -62,11 +60,8 @@ class _HomeState extends State<Home> {
                 )
               ]),
             ),
-            body:  TabBarView(
-              children: [PlantsExt(), PlantasInter(bags2: bags ), Carrito()],
-              
-            )
-            )
-            );
+            body: TabBarView(
+              children: [PlantsExt(), PlantasInter(bags2: bags), Carrito()],
+            )));
   }
 }
